@@ -6,6 +6,8 @@ import passport from 'passport';
 import { Strategy } from 'passport-local';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
+import User from './models/user';
+import Message from './models/message';
 const LocalStrategy = Strategy;
 dotenv.config();
 
