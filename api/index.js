@@ -6,8 +6,8 @@ import passport from 'passport';
 import { Strategy } from 'passport-local';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
-import User from './models/user';
-import Message from './models/message';
+import User from './models/user.js';
+import Message from './models/message.js';
 const LocalStrategy = Strategy;
 dotenv.config();
 
@@ -23,5 +23,24 @@ mongoose
   });
 const app = express();
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.post('/register', (req, res) => {
+  console.log(req.body);
+  const { name, email, password, image } = req.body;
+  // create a new User object
+  const newUser = new User({ name, email, password, image });
 
-app.listen(8000, () => console.log('listen port 4000'));
+  // save the user to the database
+  newUser
+    .save()
+    .then(() => {
+      res.status(200).json({ message: 'User registered successfully' });
+    })
+    .catch((err) => {
+      console.log('Error registering user', err);
+      res.status(500).json({ message: 'Error registering the user!' });
+    });
+});
+
+app.listen(8000, () => console.log('listen port 8000'));
