@@ -26,7 +26,7 @@ const RegisterScreen = () => {
     };
     console.log(user);
     axios
-      .post('http://localhost:8000/register', user)
+      .post('/api/users/register', user)
       .then((response) => {
         console.log(response);
         Alert.alert(
