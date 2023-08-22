@@ -1,7 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import User from '../models/user.js';
-import { jwt } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 const userRouter = express.Router();
 userRouter.post('/register', (req, res) => {
   console.log(req.body);
@@ -36,7 +36,7 @@ const createToken = (userId) => {
 };
 
 //endpoint for logging in of that particular user
-app.post('/login', (req, res) => {
+userRouter.post('/login', (req, res) => {
   const { email, password } = req.body;
 
   //check if the email and password are provided
