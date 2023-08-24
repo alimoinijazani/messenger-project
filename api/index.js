@@ -5,10 +5,8 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 import { Strategy } from 'passport-local';
 import cors from 'cors';
-import jwt from 'jsonwebtoken';
-import User from './models/user.js';
-import Message from './models/message.js';
 import userRouter from './Routes/userRouter.js';
+
 const LocalStrategy = Strategy;
 dotenv.config();
 
@@ -24,6 +22,7 @@ mongoose
   });
 const app = express();
 app.use(cors());
+app.use(passport.initialize());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use('/api/users', userRouter);
